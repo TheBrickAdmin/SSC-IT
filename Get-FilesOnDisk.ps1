@@ -31,9 +31,26 @@ function Get-FilesOnDisk {
         Date:   13-09-2024
     #>
 
+    [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true, Position = 0)]
+        [ValidateNotNullOrEmpty()]
         [string[]]$Filename,
+
+        [Parameter(Mandatory = $false, Position = 1)]
         [string[]]$Path = (Get-Location).Drive.Root, # Default to the root of the current drive
+
+        [Parameter(Mandatory = $false, Position = 2)]
+        [ValidateScript({
+            if ($_ -le (Get-CimInstance -ClassName Win32_Processor).NumberOfLogicalProcessors)
+            {
+                $true
+            }
+            else
+            {
+                throw "MaxRunSpaces cannot exceed the number of logical processors."
+            }
+        })]
         [int]$MaxRunSpaces = (Get-CimInstance -ClassName Win32_Processor).NumberOfLogicalProcessors / 2 # Default to 50% of Logical Processors to prevent overloading the system
     )
 

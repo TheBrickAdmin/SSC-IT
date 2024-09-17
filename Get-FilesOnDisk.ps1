@@ -18,11 +18,11 @@ function Get-FilesOnDisk {
         The maximum number of concurrent runspaces. Defaults to half the number of logical processors.
 
     .EXAMPLE
-        PS> Get-FilesOnDisk -Pattern "mylostfile.txt" -Path "C:\Users"
+        PS> Get-FilesOnDisk -Filename "mylostfile.txt" -Path "C:\Users"
         C:\Users\The\File\Was\Found\Here\mylostfile.txt
 
     .EXAMPLE
-        PS> Get-FilesOnDisk -Pattern @("mylostfile.txt", "myotherlostfile.txt") -Path "C:\Users"
+        PS> Get-FilesOnDisk -Filename @("mylostfile.txt", "myotherlostfile.txt") -Path "C:\Users"
         C:\Users\The\File\Was\Found\Here\mylostfile.txt
         C:\Users\The\File\Was\Found\On\Another\Location\myotherlostfile.txt
 
